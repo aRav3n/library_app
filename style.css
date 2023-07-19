@@ -69,27 +69,35 @@ body > div:first-child {
     padding: 2vh 2vw 2vh 2vw;
 }
 
-form {
-    display: grid;
-    gap: 2vh;
-}
-
 form > legend {
     font-family: 'gothicabold', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     justify-self: center;
 }
+
 label {
+    background-color: #72727219;
+    border-radius: 1.5vmin;
     display: grid;
+    padding: 1vmin;
 }
 
 h1 {
     font-family: 'gothicabold', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 2rem;
-    justify-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .sidebar {
     background-color: greenyellow;
     grid-column: 1 / 2;
     grid-row: 2 / -1;
+}
+
+.sidebar > form {
+    border: 1px solid black;
+    border-radius: 2vmin;
+    display: grid;
+    gap: 1vh;
+    padding: 2vmin;
 }
