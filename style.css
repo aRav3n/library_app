@@ -110,6 +110,14 @@ h1 {
     text-align: center;
 }
 
+input[type="text"],
+input[type="tel"] {
+    background-color: #ffffffaa;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.25rem;
+}
+
 .sidebar {
     background-color: #787f8988;
     grid-column: 1 / 2;
@@ -138,6 +146,7 @@ h1 {
     background-color: #ffe28156;
     border-radius: 1.5vmin;
     display: grid;
+    gap: 0.5vh;
     padding: 1vmin;
 }
 
