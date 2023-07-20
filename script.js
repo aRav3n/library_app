@@ -1,6 +1,6 @@
 const author = document.getElementById('author');
 const bookAddButton = document.getElementById('addToCollection');
-const contents = document.getElementById('contents');
+const contents = document.querySelector('#contents');
 const pages = document.getElementById('pages');
 const read = document.getElementById('read');
 const sidebar = document.getElementById('sidebar');
@@ -9,6 +9,7 @@ const title = document.getElementById('title');
 let LOTR = new Book('Lord of The Rings', 'J.R.R. Tolkien', 1178, 'Read');
 let myLibrary = [];
 myLibrary.push(LOTR);
+LOTR.addCard();
 
 function addBookToLibrary (bookName) {
     myLibrary.push(bookName)
@@ -51,7 +52,6 @@ function Book(title, author, pages, read) {
         cardDiv.appendChild(authorDiv);
         cardDiv.appendChild(pagesDiv);
         cardDiv.appendChild(statusDiv);
-        contents.appendChild(cardDiv);
     };
     this.getInfo = function() {
         let string = title + ' was written by ' + author + '. It is ' + pages + ' pages long and I have ' + read + ' it.' 
@@ -77,6 +77,12 @@ function createNewDiv(textContents) {
     return div;
 };
 
+window.addEventListener('DOMContentLoaded', () => {
+    for (let item in myLibrary){
+        item.addCard;
+    };
+});
+
 bookAddButton.addEventListener('click', () => {
     console.log("button clicked")
     let authorValue = author.value;
@@ -93,10 +99,4 @@ bookAddButton.addEventListener('click', () => {
     let bookObject = new Book(titleValue, authorValue, pagesValue, readValue);
 
     addBookToLibrary(bookObject);
-});
-
-window.addEventListener('DOMContentLoaded', () => {
-    for (let item in myLibrary){
-        item.addCard;
-    }
 });
