@@ -8,8 +8,15 @@ const title = document.getElementById('title');
 
 let LOTR = new Book('Lord of The Rings', 'J.R.R. Tolkien', 1178, 'Read');
 let myLibrary = [];
+myLibrary.push(LOTR);
 
-function addBookToLibrary () {
+function addBookToLibrary (bookName) {
+    myLibrary.push(bookName)
+    contents.innerHTML = ''
+
+    for (let item of myLibrary) {
+        item.addCard();
+    }
 };
 
 function Book(title, author, pages, read) {
@@ -71,11 +78,11 @@ function createNewDiv(textContents) {
 };
 
 bookAddButton.addEventListener('click', () => {
+    console.log("button clicked")
     let authorValue = author.value;
     let pagesValue = pages.value;
     let readValue;
     let titleValue = title.value;
-    let objectName = convertToObjectName(titleValue);
 
     if (read.checked) {
         readValue = 'Read'
@@ -83,5 +90,13 @@ bookAddButton.addEventListener('click', () => {
         readValue = 'Not Read'
     };
 
+    let bookObject = new Book(titleValue, authorValue, pagesValue, readValue);
 
+    addBookToLibrary(bookObject);
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+    for (let item in myLibrary){
+        item.addCard;
+    }
 });
