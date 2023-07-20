@@ -91,15 +91,15 @@ label {
     text-align: center;
 }
 
-.content {
+#content {
     background-color: #787f8944;
     display: grid;
     grid-column: -2 / -1;
     grid-template-columns: repeat(auto-fit, max(15rem, 24%));
 }
 
-.content,
-.sidebar {
+#content,
+#sidebar {
     padding: 2vh 2vw 2vh 2vw;
 }
 
@@ -118,13 +118,13 @@ input[type="tel"] {
     padding: 0.25rem;
 }
 
-.sidebar {
+#sidebar {
     background-color: #787f8988;
     grid-column: 1 / 2;
     grid-row: 2 / 3;
 }
 
-.sidebar > form {
+#sidebar > form {
     background-color: #b3aba5;
     border: 4px solid #57534e;
     border-radius: 2vmin;
@@ -133,7 +133,7 @@ input[type="tel"] {
     padding: 2vmin;
 }
 
-.sidebar > form > button {
+#sidebar > form > button {
     background-color: #fddf4799;
     border: none;
     border-radius: 0.5rem;
@@ -142,7 +142,7 @@ input[type="tel"] {
     width: 11rem;
 }
 
-.sidebar > form > label {
+#sidebar > form > label {
     background-color: #ffe28156;
     border-radius: 1.5vmin;
     display: grid;
@@ -150,7 +150,7 @@ input[type="tel"] {
     padding: 1vmin;
 }
 
-.sidebar > form > legend {
+#sidebar > form > legend {
     font-family: 'gothicabold', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     justify-self: center;
 }
