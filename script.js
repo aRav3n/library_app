@@ -26,6 +26,25 @@ function Book(title, author, pages, read) {
         let pagesContents = createNewDiv(pages);
         let statusHeading = createNewDiv('Status');
         let statusContents = createNewDiv(read);
+        let titleDiv = createNewDiv('');
+        let authorDiv = createNewDiv('');
+        let pagesDiv = createNewDiv('');
+        let statusDiv = createNewDiv('');
+        let cardDiv = createNewDiv('');
+        cardDiv.classList.add('card');
+        titleDiv.appendChild(titleHeading);
+        titleDiv.appendChild(titleContents);
+        authorDiv.appendChild(authorHeading);
+        authorDiv.appendChild(authorContents);
+        pagesDiv.appendChild(pagesHeading);
+        pagesDiv.appendChild(pagesContents);
+        statusDiv.appendChild(statusHeading);
+        statusDiv.appendChild(statusContents);
+        cardDiv.appendChild(titleDiv);
+        cardDiv.appendChild(authorDiv);
+        cardDiv.appendChild(pagesDiv);
+        cardDiv.appendChild(statusDiv);
+        contents.appendChild(cardDiv);
     };
     this.getInfo = function() {
         let string = title + ' was written by ' + author + '. It is ' + pages + ' pages long and I have ' + read + ' it.' 
