@@ -42,6 +42,7 @@ source: https://fontlibrary.org/en/font/gothica*/
 }
 
 body {
+    background-color: #fafafa;
     display: grid;
     grid-template-columns: 1fr 4fr;
     grid-template-rows: 4rem;
@@ -53,32 +54,53 @@ body {
 
 body > div:first-child {
     align-items: center;
+    background-color: #787f8911;
     grid-column: 1 / -1;
     grid-row: 1;
     justify-content: center;
 }
 
+button,
+input[type="text"],
+input[type="tel"],
+label {
+    appearance: none;
+}
+
+.card {
+    background-color: #ffffff88;
+    border-radius: 1rem;
+    display: grid;
+    gap: .5rem;
+    height: fit-content;
+    padding: 1rem;
+}
+
+.card > div {
+    background-color: #00000011;
+    border-radius: .5rem;
+    padding: .5rem;
+}
+
+.card > div > div:first-child {
+    color: #00000088;
+}
+
+.card > div > div:nth-child(2) {
+    font-weight: bold;
+    text-align: center;
+}
+
 .content {
-    background-color: pink;
-    grid-column: 2 / -1;
-    grid-row: 2 / -1;
+    background-color: #787f8944;
+    display: grid;
+    grid-column: -2 / -1;
+    grid-template-columns: repeat(auto-fit, max(15rem, 24%));
 }
 
 .content,
 .sidebar {
     padding: 2vh 2vw 2vh 2vw;
-}
-
-form > legend {
-    font-family: 'gothicabold', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    justify-self: center;
-}
-
-label {
-    background-color: #ffe28156;
-    border-radius: 1.5vmin;
-    display: grid;
-    padding: 1vmin;
 }
 
 h1 {
@@ -89,16 +111,37 @@ h1 {
 }
 
 .sidebar {
-    background-color: greenyellow;
+    background-color: #787f8988;
     grid-column: 1 / 2;
-    grid-row: 2 / -1;
+    grid-row: 2 / 3;
 }
 
 .sidebar > form {
-    background-color: #a8a29e;
-    border: 2px solid #57534e;
+    background-color: #b3aba5;
+    border: 4px solid #57534e;
     border-radius: 2vmin;
     display: grid;
     gap: 1vh;
     padding: 2vmin;
+}
+
+.sidebar > form > button {
+    background-color: #fddf4799;
+    border: none;
+    border-radius: 0.5rem;
+    justify-self: center;
+    padding: 0.5rem;
+    width: 11rem;
+}
+
+.sidebar > form > label {
+    background-color: #ffe28156;
+    border-radius: 1.5vmin;
+    display: grid;
+    padding: 1vmin;
+}
+
+.sidebar > form > legend {
+    font-family: 'gothicabold', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    justify-self: center;
 }
