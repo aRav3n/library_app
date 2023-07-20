@@ -1,6 +1,6 @@
-const author = document.querySelector(#author)
-const bookAddButton = document.querySelector(#addToCollection);
-
+const author = document.querySelector('#author');
+const bookAddButton = document.querySelector('#addToCollection');
+const pages = document.querySelector('#pages');
 
 let myLibrary = [];
 
