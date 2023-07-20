@@ -1,4 +1,8 @@
-let myLibrary = []
+const author = document.querySelector(#author)
+const bookAddButton = document.querySelector(#addToCollection);
+
+
+let myLibrary = [];
 
 function Book(title, author, pages, read) {
     this.title = title
@@ -9,10 +13,14 @@ function Book(title, author, pages, read) {
         let string = title + ' was written by ' + author + '. It is ' + pages + ' pages long and I have ' + read + ' it.' 
         return string
     }
-}
+};
 
 function addBookToLibrary () {
-    
-}
 
-let LOTR = new Book('Lord of The Rings', 'JRR Tolkien', 1178, 'read')
+};
+
+bookAddButton.addEventListener('click', () => {
+
+});
+
+let LOTR = new Book('Lord of The Rings', 'J.R.R. Tolkien', 1178, 'Read');
