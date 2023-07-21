@@ -1,10 +1,28 @@
-const author = document.getElementById('author');
-const bookAddButton = document.getElementById('addToCollection');
+const bookAddButton = document.querySelector('#addToCollection');
 const contents = document.querySelector('#contents');
-const pages = document.getElementById('pages');
-const read = document.getElementById('read');
-const sidebar = document.getElementById('sidebar');
-const title = document.getElementById('title');
+const sidebar = document.querySelector('#sidebar');
+const author = document.querySelector('#author');
+const pages = document.querySelector('#pages');
+const read = document.querySelector('#read');
+const title = document.querySelector('#title');
+
+bookAddButton.addEventListener('click', () => {
+    console.log("button clicked")
+    let authorValue = document.querySelector('#author').value;
+    let pagesValue = document.querySelector('#pages').value;
+    let readValue = document.querySelector('#read').value;
+    let titleValue = document.querySelector('#title').value;
+
+    if (read.checked) {
+        readValue = 'Read'
+    } else {
+        readValue = 'Not Read'
+    };
+
+    let bookObject = new Book(titleValue, authorValue, pagesValue, readValue);
+
+    addBookToLibrary(bookObject);
+});
 
 let LOTR = new Book('Lord of The Rings', 'J.R.R. Tolkien', 1178, 'Read');
 let myLibrary = [];
@@ -12,12 +30,12 @@ myLibrary.push(LOTR);
 LOTR.addCard();
 
 function addBookToLibrary (bookName) {
-    myLibrary.push(bookName)
-    contents.innerHTML = ''
+    myLibrary.push(bookName);
+    contents.innerHTML = '';
 
     for (let item of myLibrary) {
         item.addCard();
-    }
+    };
 };
 
 function Book(title, author, pages, read) {
@@ -52,10 +70,7 @@ function Book(title, author, pages, read) {
         cardDiv.appendChild(authorDiv);
         cardDiv.appendChild(pagesDiv);
         cardDiv.appendChild(statusDiv);
-    };
-    this.getInfo = function() {
-        let string = title + ' was written by ' + author + '. It is ' + pages + ' pages long and I have ' + read + ' it.' 
-        return string
+        contents.appendChild(cardDiv);
     };
 };
 
@@ -81,22 +96,4 @@ window.addEventListener('DOMContentLoaded', () => {
     for (let item in myLibrary){
         item.addCard;
     };
-});
-
-bookAddButton.addEventListener('click', () => {
-    console.log("button clicked")
-    let authorValue = author.value;
-    let pagesValue = pages.value;
-    let readValue;
-    let titleValue = title.value;
-
-    if (read.checked) {
-        readValue = 'Read'
-    } else {
-        readValue = 'Not Read'
-    };
-
-    let bookObject = new Book(titleValue, authorValue, pagesValue, readValue);
-
-    addBookToLibrary(bookObject);
 });
