@@ -142,6 +142,10 @@ input[type="tel"] {
     width: 11rem;
 }
 
+#sidebar > form > button:active {
+    background-color: #fddf47;
+}
+
 #sidebar > form > label {
     background-color: #ffe28156;
     border-radius: 1.5vmin;
