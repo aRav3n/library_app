@@ -16,7 +16,25 @@ for (let item in myLibrary){
 };
 
 bookAddButton.addEventListener('click', () => {
+    if(title.value && pages.value && author.value){
+        let titleValue = title.value;
+        let authorValue = author.value;
+        let pagesValue = pages.value;
+        let readValue;
     
+        if(read.checked) {
+            readValue = 'Read'
+        } else {
+            readValue = 'Not Read'
+        };
+    
+        let newBook = new Book(titleValue, authorValue, pagesValue, readValue);
+        addBookToLibrary(newBook);
+        title.value = '';
+        author.value = '';
+        pages.value = '';
+        read.checked = '';
+    };
 });
 
 function addBookToLibrary (bookName) {
@@ -62,18 +80,6 @@ function Book(title, author, pages, read) {
         cardDiv.classList.add('card');
         contents.appendChild(cardDiv);
     };
-};
-
-function convertToObjectName(name) {
-    let objectName;
-    nameArray = name.split(' ');
-    for(let word of nameArray) {
-        let newWord = word.toLowerCase();
-        let upperCaseLetter = newWord.charAt(0).toUpperCase();
-        newWord.charAt(0) = upperCaseLetter;
-        objectName += newWord;
-    };
-    return objectName;
 };
 
 function createNewDiv(textContents) {

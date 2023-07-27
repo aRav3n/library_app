@@ -92,16 +92,18 @@ label {
 }
 
 #contents {
+    align-content: start;
     background-color: #787f8944;
     display: grid;
+    gap: 1vmin;
     grid-column: -2 / -1;
     grid-template-columns: repeat(auto-fit, max(15rem, 24%));
-    padding: 2vh 2vw 2vh 2vw;
+    justify-content: space-evenly;
 }
 
-#content,
+#contents,
 #sidebar {
-    padding: 2vh 2vw 2vh 2vw;
+    padding: 1vh 1vw 1vh 1vw;
 }
 
 h1 {
