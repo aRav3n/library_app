@@ -64,7 +64,12 @@ function Book(title, author, pages, read) {
         let authorDiv = createNewDiv('');
         let pagesDiv = createNewDiv('');
         let statusDiv = createNewDiv('');
+        let buttonDiv = createNewDiv('');
         let cardDiv = createNewDiv('');
+        let removeButton = createNewButton('Delete', 'deleteButton');
+        let statusButton = createNewButton('Change Read Status', 'statusButton');
+        buttonDiv.appendChild(statusButton);
+        buttonDiv.appendChild(removeButton);
         titleDiv.appendChild(titleHeading);
         titleDiv.appendChild(titleContents);
         authorDiv.appendChild(authorHeading);
@@ -77,9 +82,18 @@ function Book(title, author, pages, read) {
         cardDiv.appendChild(authorDiv);
         cardDiv.appendChild(pagesDiv);
         cardDiv.appendChild(statusDiv);
+        cardDiv.appendChild(buttonDiv);
         cardDiv.classList.add('card');
         contents.appendChild(cardDiv);
     };
+};
+
+function createNewButton (textContents, className) {
+    let button = document.createElement('button');
+    button.innerText = textContents;
+    button.classList.add(className);
+    button.setAttribute('type', 'button');
+    return button;
 };
 
 function createNewDiv(textContents) {
