@@ -1,29 +1,22 @@
-let bookAddButton;
-let contents;
-let sidebar;
-let author;
-let pages;
-let read;
-let title;
+const bookAddButton = document.querySelector('#addToCollection');
+const contents = document.querySelector('#contents');
+const sidebar = document.querySelector('#sidebar');
+const author = document.querySelector('#author');
+const pages = document.querySelector('#pages');
+const read = document.querySelector('#read');
+const title = document.querySelector('#title');
 
-window.addEventListener('DOMContentLoaded', () => {
-    bookAddButton = document.querySelector('#addToCollection');
-    contents = document.querySelector('#contents');
-    sidebar = document.querySelector('#sidebar');
-    author = document.querySelector('#author');
-    pages = document.querySelector('#pages');
-    read = document.querySelector('#read');
-    title = document.querySelector('#title');
+let myLibrary = [];
+let LOTR = new Book('Lord of The Rings', 'J.R.R. Tolkien', 1178, 'Read');
+myLibrary.push(LOTR);
+LOTR.addCard();
 
+for (let item in myLibrary){
+    item.addCard;
+};
 
-    let myLibrary = [];
-    let LOTR = new Book('Lord of The Rings', 'J.R.R. Tolkien', 1178, 'Read');
-    myLibrary.push(LOTR);
-    LOTR.addCard();
-
-    for (let item in myLibrary){
-        item.addCard;
-    };
+bookAddButton.addEventListener('click', () => {
+    
 });
 
 function addBookToLibrary (bookName) {
@@ -33,10 +26,6 @@ function addBookToLibrary (bookName) {
     for (let item of myLibrary) {
         item.addCard();
     };
-};
-
-function addCard(book) {
-
 };
 
 function Book(title, author, pages, read) {
