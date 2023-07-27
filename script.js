@@ -1,33 +1,30 @@
-const bookAddButton = document.querySelector('#addToCollection');
-const contents = document.querySelector('#contents');
-const sidebar = document.querySelector('#sidebar');
-const author = document.querySelector('#author');
-const pages = document.querySelector('#pages');
-const read = document.querySelector('#read');
-const title = document.querySelector('#title');
+let bookAddButton;
+let contents;
+let sidebar;
+let author;
+let pages;
+let read;
+let title;
 
-bookAddButton.addEventListener('click', () => {
-    console.log("button clicked")
-    let authorValue = document.querySelector('#author').value;
-    let pagesValue = document.querySelector('#pages').value;
-    let readValue = document.querySelector('#read').value;
-    let titleValue = document.querySelector('#title').value;
+window.addEventListener('DOMContentLoaded', () => {
+    bookAddButton = document.querySelector('#addToCollection');
+    contents = document.querySelector('#contents');
+    sidebar = document.querySelector('#sidebar');
+    author = document.querySelector('#author');
+    pages = document.querySelector('#pages');
+    read = document.querySelector('#read');
+    title = document.querySelector('#title');
 
-    if (read.checked) {
-        readValue = 'Read'
-    } else {
-        readValue = 'Not Read'
+
+    let myLibrary = [];
+    let LOTR = new Book('Lord of The Rings', 'J.R.R. Tolkien', 1178, 'Read');
+    myLibrary.push(LOTR);
+    LOTR.addCard();
+
+    for (let item in myLibrary){
+        item.addCard;
     };
-
-    let bookObject = new Book(titleValue, authorValue, pagesValue, readValue);
-
-    addBookToLibrary(bookObject);
 });
-
-let LOTR = new Book('Lord of The Rings', 'J.R.R. Tolkien', 1178, 'Read');
-let myLibrary = [];
-myLibrary.push(LOTR);
-LOTR.addCard();
 
 function addBookToLibrary (bookName) {
     myLibrary.push(bookName);
@@ -36,6 +33,10 @@ function addBookToLibrary (bookName) {
     for (let item of myLibrary) {
         item.addCard();
     };
+};
+
+function addCard(book) {
+
 };
 
 function Book(title, author, pages, read) {
@@ -57,7 +58,6 @@ function Book(title, author, pages, read) {
         let pagesDiv = createNewDiv('');
         let statusDiv = createNewDiv('');
         let cardDiv = createNewDiv('');
-        cardDiv.classList.add('card');
         titleDiv.appendChild(titleHeading);
         titleDiv.appendChild(titleContents);
         authorDiv.appendChild(authorHeading);
@@ -70,6 +70,7 @@ function Book(title, author, pages, read) {
         cardDiv.appendChild(authorDiv);
         cardDiv.appendChild(pagesDiv);
         cardDiv.appendChild(statusDiv);
+        cardDiv.classList.add('card');
         contents.appendChild(cardDiv);
     };
 };
@@ -91,9 +92,3 @@ function createNewDiv(textContents) {
     div.innerText = textContents;
     return div;
 };
-
-window.addEventListener('DOMContentLoaded', () => {
-    for (let item in myLibrary){
-        item.addCard;
-    };
-});

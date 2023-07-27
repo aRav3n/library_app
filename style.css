@@ -68,7 +68,7 @@ label {
 }
 
 .card {
-    background-color: #ffffff88;
+    background-color: #b3aba588;
     border-radius: 1rem;
     display: grid;
     gap: .5rem;
@@ -77,7 +77,7 @@ label {
 }
 
 .card > div {
-    background-color: #00000011;
+    background-color: #ffffff98;
     border-radius: .5rem;
     padding: .5rem;
 }
@@ -91,11 +91,12 @@ label {
     text-align: center;
 }
 
-#content {
+#contents {
     background-color: #787f8944;
     display: grid;
     grid-column: -2 / -1;
     grid-template-columns: repeat(auto-fit, max(15rem, 24%));
+    padding: 2vh 2vw 2vh 2vw;
 }
 
 #content,
