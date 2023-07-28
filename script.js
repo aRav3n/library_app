@@ -8,6 +8,7 @@ const title = document.querySelector('#title');
 const myLibrary = [];
 const LOTR = new Book('Lord of The Rings', 'J.R.R. Tolkien', 1178, 'Read');
 let deleteButtons = document.querySelectorAll('.deleteButton');
+let statusButtons = document.querySelectorAll('.statusButton');
 
 window.addEventListener('DOMContentLoaded', () => {
     addBookToLibrary(LOTR);
@@ -35,7 +36,7 @@ bookAddButton.addEventListener('click', () => {
     };
 });
 
-function addBookToLibrary (book) {
+function addBookToLibrary(book) {
     myLibrary.push(book);
     refreshLibrary();
 };
@@ -47,13 +48,13 @@ function Book(title, author, pages, read) {
     this.read = read;
     this.addCard = function() {
         let titleHeading = createNewDiv('Title:');
-        let titleContents = createNewDiv(title);
+        let titleContents = createNewDiv(this.title);
         let authorHeading = createNewDiv('Author:');
-        let authorContents = createNewDiv(author);
+        let authorContents = createNewDiv(this.author);
         let pagesHeading = createNewDiv('Pages:');
-        let pagesContents = createNewDiv(pages);
+        let pagesContents = createNewDiv(this.pages);
         let statusHeading = createNewDiv('Status');
-        let statusContents = createNewDiv(read);
+        let statusContents = createNewDiv(this.read);
         let titleDiv = createNewDiv('');
         let authorDiv = createNewDiv('');
         let pagesDiv = createNewDiv('');
@@ -62,7 +63,6 @@ function Book(title, author, pages, read) {
         let cardDiv = createNewDiv('');
         let removeButton = createNewButton('Delete', 'deleteButton');
         let statusButton = createNewButton('Change Read Status', 'statusButton');
-        statusContents.classList.add('statusContents');
         buttonDiv.appendChild(statusButton);
         buttonDiv.appendChild(removeButton);
         titleDiv.appendChild(titleHeading);
@@ -83,7 +83,7 @@ function Book(title, author, pages, read) {
     };
 };
 
-function createNewButton (textContents, className) {
+function createNewButton(textContents, className) {
     let button = document.createElement('button');
     button.innerText = textContents;
     button.classList.add(className);
@@ -97,15 +97,24 @@ function createNewDiv(textContents) {
     return div;
 };
 
-function refreshLibrary () {
+function refreshLibrary() {
     contents.innerHTML = '';
     for (let i = 0; i < myLibrary.length; i++) {
         myLibrary[i].addCard();
     };
     deleteButtons = document.querySelectorAll('.deleteButton');
+    statusButtons = document.querySelectorAll('.statusButton');
     for (let i = 0; i < myLibrary.length; i++){
         deleteButtons[i].addEventListener('click', () => {
             myLibrary.splice(i, 1);
+            refreshLibrary();
+        });
+        statusButtons[i].addEventListener('click', () => {
+            if (myLibrary[i].read === 'Read'){
+                myLibrary[i].read = 'Not Read';
+            } else {
+                myLibrary[i].read = 'Read';
+            };
             refreshLibrary();
         });
     };
