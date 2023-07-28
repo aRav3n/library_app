@@ -7,11 +7,13 @@ const read = document.querySelector('#read');
 const title = document.querySelector('#title');
 const myLibrary = [];
 const LOTR = new Book('Lord of The Rings', 'J.R.R. Tolkien', 1178, 'Read');
+const WOT = new Book('Wheel of Time', 'Robert Jordan & Brandon Sanderson', 11898, 'Read')
 let deleteButtons = document.querySelectorAll('.deleteButton');
 let statusButtons = document.querySelectorAll('.statusButton');
 
 window.addEventListener('DOMContentLoaded', () => {
     addBookToLibrary(LOTR);
+    addBookToLibrary(WOT);
 });
 
 bookAddButton.addEventListener('click', () => {
