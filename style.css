@@ -60,6 +60,15 @@ body > div:first-child {
     justify-content: center;
 }
 
+button {
+    background-color: #fddf4799;
+    border: none;
+}
+
+button:active {
+    background-color: #fddf47;
+}
+
 button,
 input[type="text"],
 input[type="tel"],
@@ -80,6 +89,21 @@ label {
     background-color: #ffffff98;
     border-radius: .5rem;
     padding: .5rem;
+}
+
+.card > div:last-child {
+    align-items: center;
+    background: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    padding: 0;
+}
+
+.card > div:last-child > button {
+    border-radius: 0.25rem;
+    padding: 0.4rem;
+    width: 80%;
 }
 
 .card > div > div:first-child {
@@ -137,16 +161,10 @@ input[type="tel"] {
 }
 
 #sidebar > form > button {
-    background-color: #fddf4799;
-    border: none;
     border-radius: 0.5rem;
     justify-self: center;
     padding: 0.5rem;
     width: 11rem;
-}
-
-#sidebar > form > button:active {
-    background-color: #fddf47;
 }
 
 #sidebar > form > label {
