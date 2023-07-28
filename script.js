@@ -5,15 +5,13 @@ const author = document.querySelector('#author');
 const pages = document.querySelector('#pages');
 const read = document.querySelector('#read');
 const title = document.querySelector('#title');
+const myLibrary = [];
+const LOTR = new Book('Lord of The Rings', 'J.R.R. Tolkien', 1178, 'Read');
+let deleteButtons = document.querySelectorAll('.deleteButton');
 
-let myLibrary = [];
-let LOTR = new Book('Lord of The Rings', 'J.R.R. Tolkien', 1178, 'Read');
-myLibrary.push(LOTR);
-LOTR.addCard();
-
-for (let item in myLibrary){
-    item.addCard;
-};
+window.addEventListener('DOMContentLoaded', () => {
+    addBookToLibrary(LOTR);
+});
 
 bookAddButton.addEventListener('click', () => {
     if(title.value && pages.value && author.value){
@@ -37,13 +35,9 @@ bookAddButton.addEventListener('click', () => {
     };
 });
 
-function addBookToLibrary (bookName) {
-    myLibrary.push(bookName);
-    contents.innerHTML = '';
-
-    for (let item of myLibrary) {
-        item.addCard();
-    };
+function addBookToLibrary (book) {
+    myLibrary.push(book);
+    refreshLibrary();
 };
 
 function Book(title, author, pages, read) {
@@ -68,6 +62,7 @@ function Book(title, author, pages, read) {
         let cardDiv = createNewDiv('');
         let removeButton = createNewButton('Delete', 'deleteButton');
         let statusButton = createNewButton('Change Read Status', 'statusButton');
+        statusContents.classList.add('statusContents');
         buttonDiv.appendChild(statusButton);
         buttonDiv.appendChild(removeButton);
         titleDiv.appendChild(titleHeading);
@@ -100,4 +95,18 @@ function createNewDiv(textContents) {
     let div = document.createElement('div');
     div.innerText = textContents;
     return div;
+};
+
+function refreshLibrary () {
+    contents.innerHTML = '';
+    for (let i = 0; i < myLibrary.length; i++) {
+        myLibrary[i].addCard();
+    };
+    deleteButtons = document.querySelectorAll('.deleteButton');
+    for (let i = 0; i < myLibrary.length; i++){
+        deleteButtons[i].addEventListener('click', () => {
+            myLibrary.splice(i, 1);
+            refreshLibrary();
+        });
+    };
 };
