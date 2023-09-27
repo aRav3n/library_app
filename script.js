@@ -6,15 +6,8 @@ const pages = document.querySelector('#pages');
 const read = document.querySelector('#read');
 const title = document.querySelector('#title');
 const myLibrary = [];
-const LOTR = new Book('Lord of The Rings', 'J.R.R. Tolkien', 1178, 'Read');
-const WOT = new Book('Wheel of Time', 'Robert Jordan & Brandon Sanderson', 11898, 'Read')
 let deleteButtons = document.querySelectorAll('.deleteButton');
 let statusButtons = document.querySelectorAll('.statusButton');
-
-window.addEventListener('DOMContentLoaded', () => {
-    addBookToLibrary(LOTR);
-    addBookToLibrary(WOT);
-});
 
 bookAddButton.addEventListener('click', () => {
     if(title.value && pages.value && author.value){
@@ -30,7 +23,7 @@ bookAddButton.addEventListener('click', () => {
         };
     
         let newBook = new Book(titleValue, authorValue, pagesValue, readValue);
-        addBookToLibrary(newBook);
+        newBook.addBookToLibrary();
         title.value = '';
         author.value = '';
         pages.value = '';
@@ -38,17 +31,20 @@ bookAddButton.addEventListener('click', () => {
     };
 });
 
-function addBookToLibrary(book) {
-    myLibrary.push(book);
-    refreshLibrary();
-};
+class Book {
+    constructor(title, author, pages, read){
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
+    
+    addBookToLibrary() {
+        myLibrary.push(this);
+        refreshLibrary();
+    }
 
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-    this.addCard = function() {
+    addCard() {
         let titleHeading = createNewDiv('Title:');
         let titleContents = createNewDiv(this.title);
         let authorHeading = createNewDiv('Author:');
@@ -82,7 +78,7 @@ function Book(title, author, pages, read) {
         cardDiv.appendChild(buttonDiv);
         cardDiv.classList.add('card');
         contents.appendChild(cardDiv);
-    };
+    }
 };
 
 function createNewButton(textContents, className) {
@@ -121,3 +117,11 @@ function refreshLibrary() {
         });
     };
 };
+
+const LOTR = new Book('Lord of The Rings', 'J.R.R. Tolkien', 1178, 'Read');
+const WOT = new Book('Wheel of Time', 'Robert Jordan & Brandon Sanderson', 11898, 'Read');
+
+window.addEventListener('DOMContentLoaded', () => {
+    LOTR.addBookToLibrary();
+    WOT.addBookToLibrary();
+});
