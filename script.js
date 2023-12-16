@@ -1,127 +1,186 @@
-const bookAddButton = document.querySelector('#addToCollection');
-const contents = document.querySelector('#contents');
-const sidebar = document.querySelector('#sidebar');
-const author = document.querySelector('#author');
-const pages = document.querySelector('#pages');
-const read = document.querySelector('#read');
-const title = document.querySelector('#title');
+const author = document.querySelector("#author");
+const bookAddButton = document.querySelector("#addToCollection");
+const contents = document.querySelector("#contents");
+const form = document.querySelector("form");
+const pages = document.querySelector("#pages");
+const read = document.querySelector("#read");
+const title = document.querySelector("#title");
 const myLibrary = [];
-let deleteButtons = document.querySelectorAll('.deleteButton');
-let statusButtons = document.querySelectorAll('.statusButton');
+let deleteButtons = document.querySelectorAll(".deleteButton");
+let statusButtons = document.querySelectorAll(".statusButton");
 
-bookAddButton.addEventListener('click', () => {
-    if(title.value && pages.value && author.value){
-        let titleValue = title.value;
-        let authorValue = author.value;
-        let pagesValue = pages.value;
-        let readValue;
-    
-        if(read.checked) {
-            readValue = 'Read'
-        } else {
-            readValue = 'Not Read'
-        };
-    
-        let newBook = new Book(titleValue, authorValue, pagesValue, readValue);
-        newBook.addBookToLibrary();
-        title.value = '';
-        author.value = '';
-        pages.value = '';
-        read.checked = '';
-    };
-});
+const displayError = function displayErrorMessage(field, errorMessage) {
+  const errorField = field.parentElement.querySelector("span > span");
+  errorField.innerHTML = errorMessage;
+};
+
+const checkFilled = function checkIfFieldIsFilledOut(field) {
+  const stringToCheck = field.value;
+  let valid = false;
+  if (stringToCheck.length > 0) {
+    valid = true;
+    displayError(field, "");
+  }
+  return valid;
+};
+
+const checkNumber = function checkIfFieldIsPositiveInteger(field) {
+  const stringToCheck = field.value;
+  if (isNaN(stringToCheck)) {
+    return false;
+  } else {
+    const numberToCheck = Number(stringToCheck);
+    if (Number.isInteger(numberToCheck)) {
+      if (numberToCheck > 0) {
+        displayError(field, "");
+        return true;
+      }
+    }
+  }
+};
 
 class Book {
-    constructor(title, author, pages, read){
-        this.title = title;
-        this.author = author;
-        this.pages = pages;
-        this.read = read;
-    }
-    
-    addBookToLibrary() {
-        myLibrary.push(this);
-        refreshLibrary();
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
+
+  addBookToLibrary() {
+    myLibrary.push(this);
+    refreshLibrary();
+  }
+
+  addCard() {
+    const titleHeading = createNewDiv("Title:");
+    const titleContents = createNewDiv(this.title);
+    const authorHeading = createNewDiv("Author:");
+    const authorContents = createNewDiv(this.author);
+    const pagesHeading = createNewDiv("Pages:");
+    const pagesContents = createNewDiv(this.pages);
+    const statusHeading = createNewDiv("Status");
+    const statusContents = createNewDiv(this.read);
+    const titleDiv = createNewDiv("");
+    const authorDiv = createNewDiv("");
+    const pagesDiv = createNewDiv("");
+    const statusDiv = createNewDiv("");
+    const buttonDiv = createNewDiv("");
+    const cardDiv = createNewDiv("");
+    const removeButton = createNewButton("Delete", "deleteButton");
+    const statusButton = createNewButton("Change Read Status", "statusButton");
+    buttonDiv.appendChild(statusButton);
+    buttonDiv.appendChild(removeButton);
+    titleDiv.appendChild(titleHeading);
+    titleDiv.appendChild(titleContents);
+    authorDiv.appendChild(authorHeading);
+    authorDiv.appendChild(authorContents);
+    pagesDiv.appendChild(pagesHeading);
+    pagesDiv.appendChild(pagesContents);
+    statusDiv.appendChild(statusHeading);
+    statusDiv.appendChild(statusContents);
+    cardDiv.appendChild(titleDiv);
+    cardDiv.appendChild(authorDiv);
+    cardDiv.appendChild(pagesDiv);
+    cardDiv.appendChild(statusDiv);
+    cardDiv.appendChild(buttonDiv);
+    cardDiv.classList.add("card");
+    contents.appendChild(cardDiv);
+  }
+}
+
+const addBook = function addBookToLibraryIfValid() {
+  if (title.value && pages.value && author.value) {
+    const titleValue = title.value;
+    const authorValue = author.value;
+    const pagesValue = pages.value;
+    let readValue;
+
+    if (read.checked) {
+      readValue = "Read";
+    } else {
+      readValue = "Not Read";
     }
 
-    addCard() {
-        let titleHeading = createNewDiv('Title:');
-        let titleContents = createNewDiv(this.title);
-        let authorHeading = createNewDiv('Author:');
-        let authorContents = createNewDiv(this.author);
-        let pagesHeading = createNewDiv('Pages:');
-        let pagesContents = createNewDiv(this.pages);
-        let statusHeading = createNewDiv('Status');
-        let statusContents = createNewDiv(this.read);
-        let titleDiv = createNewDiv('');
-        let authorDiv = createNewDiv('');
-        let pagesDiv = createNewDiv('');
-        let statusDiv = createNewDiv('');
-        let buttonDiv = createNewDiv('');
-        let cardDiv = createNewDiv('');
-        let removeButton = createNewButton('Delete', 'deleteButton');
-        let statusButton = createNewButton('Change Read Status', 'statusButton');
-        buttonDiv.appendChild(statusButton);
-        buttonDiv.appendChild(removeButton);
-        titleDiv.appendChild(titleHeading);
-        titleDiv.appendChild(titleContents);
-        authorDiv.appendChild(authorHeading);
-        authorDiv.appendChild(authorContents);
-        pagesDiv.appendChild(pagesHeading);
-        pagesDiv.appendChild(pagesContents);
-        statusDiv.appendChild(statusHeading);
-        statusDiv.appendChild(statusContents);
-        cardDiv.appendChild(titleDiv);
-        cardDiv.appendChild(authorDiv);
-        cardDiv.appendChild(pagesDiv);
-        cardDiv.appendChild(statusDiv);
-        cardDiv.appendChild(buttonDiv);
-        cardDiv.classList.add('card');
-        contents.appendChild(cardDiv);
-    }
+    const newBook = new Book(titleValue, authorValue, pagesValue, readValue);
+    newBook.addBookToLibrary();
+    title.value = "";
+    author.value = "";
+    pages.value = "";
+    read.checked = "";
+  }
 };
+
+bookAddButton.addEventListener("click", () => {
+  if (
+    checkFilled(author) &&
+    checkFilled(pages) &&
+    checkNumber(pages) &&
+    checkFilled(title)
+  ) {
+    addBook();
+  } else {
+    if (!checkFilled(author)) {
+      displayError(author, "Add the author's name");
+    }
+    if (!checkFilled(pages)) {
+      displayError(pages, "Enter the number of pages");
+    }
+    if (!checkNumber(pages)) {
+      displayError(pages, "Enter a valid number");
+    }
+    if (!checkFilled(title)) {
+      displayError(title, "Add the title");
+    }
+  }
+});
 
 function createNewButton(textContents, className) {
-    let button = document.createElement('button');
-    button.innerText = textContents;
-    button.classList.add(className);
-    button.setAttribute('type', 'button');
-    return button;
-};
+  const button = document.createElement("button");
+  button.innerText = textContents;
+  button.classList.add(className);
+  button.setAttribute("type", "button");
+  return button;
+}
 
 function createNewDiv(textContents) {
-    let div = document.createElement('div');
-    div.innerText = textContents;
-    return div;
-};
+  const div = document.createElement("div");
+  div.innerText = textContents;
+  return div;
+}
 
 function refreshLibrary() {
-    contents.innerHTML = '';
-    for (let i = 0; i < myLibrary.length; i++) {
-        myLibrary[i].addCard();
-    };
-    deleteButtons = document.querySelectorAll('.deleteButton');
-    statusButtons = document.querySelectorAll('.statusButton');
-    for (let i = 0; i < myLibrary.length; i++){
-        deleteButtons[i].addEventListener('click', () => {
-            myLibrary.splice(i, 1);
-            refreshLibrary();
-        });
-        statusButtons[i].addEventListener('click', () => {
-            if (myLibrary[i].read === 'Read'){
-                myLibrary[i].read = 'Not Read';
-            } else {
-                myLibrary[i].read = 'Read';
-            };
-            refreshLibrary();
-        });
-    };
-};
+  contents.innerHTML = "";
+  for (let i = 0; i < myLibrary.length; i++) {
+    myLibrary[i].addCard();
+  }
+  deleteButtons = document.querySelectorAll(".deleteButton");
+  statusButtons = document.querySelectorAll(".statusButton");
+  for (let i = 0; i < myLibrary.length; i++) {
+    deleteButtons[i].addEventListener("click", () => {
+      myLibrary.splice(i, 1);
+      refreshLibrary();
+    });
+    statusButtons[i].addEventListener("click", () => {
+      if (myLibrary[i].read === "Read") {
+        myLibrary[i].read = "Not Read";
+      } else {
+        myLibrary[i].read = "Read";
+      }
+      refreshLibrary();
+    });
+  }
+}
 
-const LOTR = new Book('Lord of The Rings', 'J.R.R. Tolkien', 1178, 'Read');
-const WOT = new Book('Wheel of Time', 'Robert Jordan & Brandon Sanderson', 11898, 'Read');
+const LOTR = new Book("Lord of The Rings", "J.R.R. Tolkien", 1178, "Read");
+const WOT = new Book(
+  "Wheel of Time",
+  "Robert Jordan & Brandon Sanderson",
+  11898,
+  "Read"
+);
 
-window.addEventListener('DOMContentLoaded', () => {
-    LOTR.addBookToLibrary();
-    WOT.addBookToLibrary();
+window.addEventListener("DOMContentLoaded", () => {
+  LOTR.addBookToLibrary();
+  WOT.addBookToLibrary();
 });
